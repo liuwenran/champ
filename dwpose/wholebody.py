@@ -16,8 +16,10 @@ class Wholebody:
         providers = (
             ["CPUExecutionProvider"] if device == "cpu" else ["CUDAExecutionProvider"]
         )
-        onnx_det = ModelDataPathPrefix.joinpath("DWPose/yolox_l.onnx")
-        onnx_pose = ModelDataPathPrefix.joinpath("DWPose/dw-ll_ucoco_384.onnx")
+        # onnx_det = ModelDataPathPrefix.joinpath("DWPose/yolox_l.onnx")
+        # onnx_pose = ModelDataPathPrefix.joinpath("DWPose/dw-ll_ucoco_384.onnx")
+        onnx_det = ModelDataPathPrefix.joinpath("/mnt/petrelfs/liuwenran/repos/HumanAnimation/pretrained_weights/DWPose/yolox_l.onnx")
+        onnx_pose = ModelDataPathPrefix.joinpath("/mnt/petrelfs/liuwenran/repos/HumanAnimation/pretrained_weights/DWPose/dw-ll_ucoco_384.onnx")
 
         self.session_det = ort.InferenceSession(
             path_or_bytes=onnx_det, providers=providers

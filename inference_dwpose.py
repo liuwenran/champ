@@ -47,19 +47,21 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--imgs_path", type=str, default='_test')
+    parser.add_argument("--imgs_path", type=str, default='/mnt/hwfile/mm_lol/liuwenran/nips24-eval-case/champ_render_result/ubc-test-3s-frames_rendered')
     parser.add_argument('--device', type=int, default=0, help='GPU device ID')
     args = parser.parse_args()
     image_paths = []
 
-    subdir = Path(args.imgs_path)
-    if subdir.is_dir():
-        for cond_dir in subdir.iterdir():
-            if cond_dir.name == 'normal':
-                for image_path in cond_dir.iterdir():
-                    if image_path.is_file() and image_path.suffix in ['.jpg', '.png', '.jpeg']:
-                        image_paths.append(image_path)
+    root_dir = Path(args.imgs_path)
+    for subdir in root_dir.iterdir():
+        if subdir.is_dir():
+            for cond_dir in subdir.iterdir():
+                if cond_dir.name == 'normal':
+                    for image_path in cond_dir.iterdir():
+                        if image_path.is_file() and image_path.suffix in ['.jpg', '.png', '.jpeg']:
+                            image_paths.append(image_path)
 
+    import ipdb;ipdb.set_trace();
     gpu_id = args.device
     detector = DWposeDetector()
     detector = detector.to(f"cuda:{gpu_id}")
